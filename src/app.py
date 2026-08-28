@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """RAG 파이프라인 테스트용 간이 웹 UI. `python3 src/app.py` 로 실행함."""
+import os, sys
+# 로컬에서 `python3 src/app.py`로 직접 실행하면 파이썬이 이 파일의 디렉토리를 자동으로
+# sys.path에 추가해주지만(그래서 로컬에선 `import rag`가 그냥 동작함), Vercel처럼 이 파일을
+# 경로 기반으로 import하는 서버리스 환경에서는 그 자동 동작이 적용되지 않아 rag 모듈을 못 찾음.
+# __file__ 기준으로 같은 동작을 명시적으로 재현함(로컬에서는 이미 있는 경로라 중복 추가돼도 무해함).
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from flask import Flask, request, jsonify, Response
 import rag
 
