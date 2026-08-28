@@ -15,7 +15,10 @@ from datetime import date
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(ROOT, 'data', 'docs')
 OUTD = os.path.join(ROOT, 'output')
-os.makedirs(OUTD, exist_ok=True)
+try:
+    os.makedirs(OUTD, exist_ok=True)
+except OSError:
+    pass  # Vercel 등 읽기 전용 배포 환경 — output/은 이미 배포에 포함되어 있어 생성이 불필요함
 
 
 # ════════════════════════════════════════════════════════════
@@ -530,7 +533,10 @@ def _load_cache() -> dict:
 
 
 def _save_cache() -> None:
-    json.dump(_CACHE, open(CACHE_PATH, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    try:
+        json.dump(_CACHE, open(CACHE_PATH, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+    except OSError:
+        pass  # Vercel 등 읽기 전용 배포 환경 — 디스크 영속화만 건너뛰고 메모리 캐시(_CACHE)는 그대로 유지함
 
 
 def _cache_key(question: str, k: int, where: dict | None) -> str:
