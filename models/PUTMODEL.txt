@@ -1,0 +1,2 @@
+(선택) sentence-transformers 로컬 임베딩 모델을 쓰려면 이 폴더에 models/embedding/ 으로 풀 것.
+없어도 기본 백엔드(sklearn)로 정상 동작함.

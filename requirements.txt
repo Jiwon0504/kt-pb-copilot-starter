@@ -1,0 +1,10 @@
+# 최소 구성. 인터넷이 막힌 환경에서도 pdfplumber 만 있으면 동작함.
+pdfplumber>=0.11
+anthropic>=0.40
+openpyxl>=3.1
+
+# BM25 토크나이저 (한국어 형태소 분석)
+kiwipiepy>=0.20
+
+# (선택) src/app.py 웹 테스트 UI 실행에 필요함
+flask>=3.0
